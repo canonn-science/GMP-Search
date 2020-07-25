@@ -70,7 +70,15 @@
 							{title:"Name", field:"name", headerFilter:true, width: "10%"},
                             {title:"Type", field:"type", headerFilter:"input", width: "10%"},
                             
-							{title:"description", field:"descriptionHtml", formatter:"html", headerFilter:true,width: "70%"},
+							{title:"description", field:"descriptionHtml",  headerFilter:true,width: "70%",
+                                formatter:function(cell, formatterParams, onRendered){
+                                    //cell - the cell component
+                                    //formatterParams - parameters set for the column
+                                    //onRendered - function to call when the formatter has been rendered
+
+                                    return '<div style="word-wrap: break-word; white-space: normal;">' + cell.getValue() + '</div>'; //return the contents of the cell;
+                                }
+                            },
 							
                         ],       
                                 
