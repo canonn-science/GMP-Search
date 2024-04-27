@@ -90,22 +90,14 @@
                 
             }
             
-function getSignalEntries() {
+function getSignalEntriesFromFile() {
     $("#result").text("Searching");
 
-    const reader = new FileReader();
-
-    reader.onload = function(event) {
-        const fileContent = event.target.result;
-
-        // Assuming your file contains JSON data
-        const json = JSON.parse(fileContent);
-
-        // Call your updateEntries function with the parsed JSON data
-        updateEntries(json);
-    };
-
-    reader.readAsText("json-edd.json");
+    // Assuming your JSON file is hosted at 'data/signal_entries.json'
+    fetch('json-edd.json')
+        .then(response => response.json())
+        .then(json => updateEntries(json))
+        .catch(error => console.error('Error loading JSON:', error));
 }
 			
 			function submitform(){
