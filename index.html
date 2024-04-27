@@ -90,14 +90,23 @@
                 
             }
             
-			function getSignalEntries(){
-				$("#result").text("Searching")
-				console.log("fetching url")
-				fetch(encodeURI('https://us-central1-canonn-api-236217.cloudfunctions.net/gmp'))
-				.then(response => response.json())
-                .then(json => updateEntries(json))
-			;
-			}            
+function getSignalEntries() {
+    $("#result").text("Searching");
+
+    const reader = new FileReader();
+
+    reader.onload = function(event) {
+        const fileContent = event.target.result;
+
+        // Assuming your file contains JSON data
+        const json = JSON.parse(fileContent);
+
+        // Call your updateEntries function with the parsed JSON data
+        updateEntries(json);
+    };
+
+    reader.readAsText("json-edd.json");
+}
 			
 			function submitform(){
 				var data = $(this).serializeArray();
